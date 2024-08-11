@@ -32,4 +32,9 @@ public class UserService implements UserDetailsService {
         });
     }
 
+    public void createUser(User user) {
+        repository.save(user);
+    }
+
+
 }
