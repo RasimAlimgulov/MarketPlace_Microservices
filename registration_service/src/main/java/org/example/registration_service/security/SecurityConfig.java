@@ -1,4 +1,5 @@
 package org.example.registration_service.security;
+import lombok.extern.log4j.Log4j2;
 import org.example.registration_service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
+@Log4j2
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -28,20 +29,29 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//         log.info("Идет проверка доступа");
+//        http.csrf(csrf -> csrf.disable())
+//                .cors(cors -> cors.disable())
+//                .authorizeHttpRequests(auth -> auth
+//                        .requestMatchers("/reg/test").permitAll()
+//                        .requestMatchers("/reg/register").permitAll()
+////                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+//                        .anyRequest().authenticated())
+//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                .exceptionHandling(exceptions -> exceptions.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)));
+//
+//        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+//
+//      return http.build();
         http.csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login").permitAll()
-                        .requestMatchers("/register").permitAll()
-//                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        .requestMatchers("/reg/test").permitAll()
+                        .requestMatchers("/reg/registration").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(exceptions -> exceptions.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)));
-
-        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-
-      return http.build();
-
+        return http.build();
     }
 
     @Bean

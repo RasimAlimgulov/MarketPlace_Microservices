@@ -3,6 +3,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.example.registration_service.Role;
 
 
 @Entity
@@ -11,7 +12,7 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder // реализует паттерн buider
+@Builder
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class User {
@@ -27,5 +28,8 @@ public class User {
     @Column(nullable = false, name = "password")
     String password;
 
+    @Column(nullable = false, name = "role")
+    @Enumerated(EnumType.STRING)
+    Role role;
 
 }

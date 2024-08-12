@@ -9,10 +9,10 @@
         <relativePath/>
     </parent>
     <groupId>org.example</groupId>
-    <artifactId>registration_service</artifactId>
+    <artifactId>authorization_service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>registration_service</name>
-    <description>Registration Service</description>
+    <name>authorization_service</name>
+    <description>Authorization Service</description>
     <properties>
         <java.version>17</java.version>
         <spring-cloud.version>2023.0.3</spring-cloud.version>
@@ -59,12 +59,13 @@
             <version>0.11.5</version>
         </dependency>
 
-        <!-- PostgreSQL Driver -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-mongodb -->
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.7.2</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+            <version>3.3.2</version>
         </dependency>
+
 
         <!-- Lombok -->
         <dependency>
