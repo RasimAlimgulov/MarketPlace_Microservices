@@ -1,6 +1,6 @@
-package org.example.authorization_service.repository;
+package org.example.authentication_service.repository;
 
-import org.example.authorization_service.entity.User;
+import org.example.authentication_service.entity.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

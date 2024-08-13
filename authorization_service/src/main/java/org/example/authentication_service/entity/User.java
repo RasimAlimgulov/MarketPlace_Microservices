@@ -1,9 +1,11 @@
-package org.example.authorization_service.entity;
+package org.example.authentication_service.entity;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.example.authorization_service.Role;
+import org.example.authentication_service.Role;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.UUID;
