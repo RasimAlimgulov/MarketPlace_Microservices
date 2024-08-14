@@ -39,29 +39,6 @@ public class RegistrationController {
         return "adsadafdadsdasf";
     }
 
-    //    @Autowired
-//    private JwtUtil jwtUtil;
-
-    //    @Autowired
-//    private AuthenticationManager authenticationManager;
-
-//    @PostMapping("/login")
-//    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthRequest authRequest) throws Exception {
-//        log.info("Вызвался метод логирования");
-//        try {
-//            authenticationManager.authenticate(
-//                    new UsernamePasswordAuthenticationToken(authRequest.getLogin(), authRequest.getPassword())
-//            );
-//            log.info("Успешно прошла процедура authentication");
-//        } catch (Exception e) {
-//            throw new Exception("Incorrect email or password", e);
-//        }
-//        final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getLogin());
-//        log.info("Получили UserDetails");
-//        final String jwt = jwtUtil.generateToken(userDetails);
-//        log.info("Сгенерировали токен");
-//        return ResponseEntity.ok(new AuthResponse(jwt));
-//    }
 
 
 }

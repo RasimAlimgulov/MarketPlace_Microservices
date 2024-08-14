@@ -29,20 +29,6 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//         log.info("Идет проверка доступа");
-//        http.csrf(csrf -> csrf.disable())
-//                .cors(cors -> cors.disable())
-//                .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers("/reg/test").permitAll()
-//                        .requestMatchers("/reg/register").permitAll()
-////                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-//                        .anyRequest().authenticated())
-//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .exceptionHandling(exceptions -> exceptions.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)));
-//
-//        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-//
-//      return http.build();
         http.csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.disable())
                 .authorizeHttpRequests(auth -> auth
