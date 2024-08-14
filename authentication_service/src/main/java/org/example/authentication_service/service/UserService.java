@@ -14,10 +14,15 @@ import java.util.Collections;
 
 @Service
 public class UserService implements UserDetailsService {
-    @Autowired
-    UserRepository repository;
-    @Autowired
-    BCryptPasswordEncoder encoder;
+
+    private final UserRepository repository;
+    private final BCryptPasswordEncoder encoder;
+
+    public UserService(UserRepository repository, BCryptPasswordEncoder encoder) {
+        this.repository = repository;
+        this.encoder = encoder;
+    }
+
     public UserDetails loadUserByUsername(String login) {
         User user= repository.findByLogin(login).orElseThrow(() -> new UsernameNotFoundException("User not found with login: " + login));
         return new org.springframework.security.core.userdetails.User(user.getLogin(),user.getPassword(),

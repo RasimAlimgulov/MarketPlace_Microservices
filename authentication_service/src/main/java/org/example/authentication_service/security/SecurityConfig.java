@@ -22,6 +22,11 @@ public class SecurityConfig {
 
     @Autowired
     private UserService userService;
+    private final BCryptPasswordEncoder encoder;
+
+    public SecurityConfig(BCryptPasswordEncoder encoder) {
+        this.encoder = encoder;
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -39,7 +44,7 @@ public class SecurityConfig {
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider(){
         DaoAuthenticationProvider provider=new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(passwordEncoder());
+        provider.setPasswordEncoder(encoder);
         provider.setUserDetailsService(userService);
         return provider;
      }
@@ -48,8 +53,4 @@ public class SecurityConfig {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }

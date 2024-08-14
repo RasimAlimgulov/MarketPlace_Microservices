@@ -19,15 +19,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AuthenticationController {
-    @Autowired
-    private JwtUtil jwtUtil;
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final JwtUtil jwtUtil;
+    private final AuthenticationManager authenticationManager;
+    private final BCryptPasswordEncoder encoder;
 
     @Autowired
     private UserService service;
-    @Autowired
-    private BCryptPasswordEncoder encoder;
+
+    public AuthenticationController(JwtUtil jwtUtil, AuthenticationManager authenticationManager, BCryptPasswordEncoder encoder) {
+        this.jwtUtil = jwtUtil;
+        this.authenticationManager = authenticationManager;
+        this.encoder = encoder;
+    }
+
     @PostMapping("/authenticate")
     public ResponseEntity<String> authenticate(@RequestBody RequestData requestData)  {
            try{ authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(requestData.getLogin()
