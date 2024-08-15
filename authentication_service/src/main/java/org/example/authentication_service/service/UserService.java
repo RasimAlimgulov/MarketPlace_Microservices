@@ -3,6 +3,9 @@ package org.example.authentication_service.service;
 import org.example.authentication_service.entity.User;
 import org.example.authentication_service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.config.KafkaListenerContainerFactory;
+import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,10 +20,12 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository repository;
     private final BCryptPasswordEncoder encoder;
-
-    public UserService(UserRepository repository, BCryptPasswordEncoder encoder) {
+    @Autowired
+    private final KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, User>> factory;
+    public UserService(UserRepository repository, BCryptPasswordEncoder encoder, KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, User>> factory) {
         this.repository = repository;
         this.encoder = encoder;
+        this.factory = factory;
     }
 
     public UserDetails loadUserByUsername(String login) {
@@ -32,5 +37,9 @@ public class UserService implements UserDetailsService {
         String password=user.getPassword();
         user.setPassword(encoder.encode(password));
        return repository.save(user);
+    }
+    @KafkaListener(topics = "user_created",groupId = "my_id")
+    public void handleUserCreated(User user){
+        repository.save(user);
     }
 }

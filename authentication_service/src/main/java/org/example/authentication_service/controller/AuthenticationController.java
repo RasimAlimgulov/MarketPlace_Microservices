@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.config.KafkaListenerContainerFactory;
+import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,6 +28,7 @@ public class AuthenticationController {
     @Autowired
     private UserService service;
 
+
     public AuthenticationController(JwtUtil jwtUtil, AuthenticationManager authenticationManager, BCryptPasswordEncoder encoder) {
         this.jwtUtil = jwtUtil;
         this.authenticationManager = authenticationManager;
@@ -33,18 +36,22 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<String> authenticate(@RequestBody RequestData requestData)  {
-           try{ authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(requestData.getLogin()
-           ,requestData.getPassword()));}
-           catch (BadCredentialsException e){
-               return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect login or password");
-           }
-        UserDetails userDetails=service.loadUserByUsername(requestData.getLogin());
-           String  jwtToken=jwtUtil.generateToken(userDetails);
-           return ResponseEntity.ok(jwtToken);
+    public ResponseEntity<String> authenticate(@RequestBody RequestData requestData) {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(requestData.getLogin()
+                    , requestData.getPassword()));
+        } catch (BadCredentialsException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect login or password");
+        }
+        UserDetails userDetails = service.loadUserByUsername(requestData.getLogin());
+        String jwtToken = jwtUtil.generateToken(userDetails);
+        return ResponseEntity.ok(jwtToken);
     }
+
     @PostMapping("/create")
-    public User create(@RequestBody User user){
+    public User create(@RequestBody User user) {
         return service.createUser(user);
     }
+
+
 }
