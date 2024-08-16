@@ -101,6 +101,10 @@
             <artifactId>spring-kafka</artifactId>
             <version>3.2.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+        </dependency>
 
     </dependencies>
 
