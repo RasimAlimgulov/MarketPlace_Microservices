@@ -1,0 +1,8 @@
+-Запустить PostgreSql
+-Запустить сервер MongoDb
+    -mongod(В папке с установленным)
+-Запустить Kafka сервер и Zookeeper
+    -C:\Users\User>cd C:\kafka_2.12-3.8.0
+     C:\kafka_2.12-3.8.0>.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+    -C:\Users\User>cd C:\kafka_2.12-3.8.0
+     C:\kafka_2.12-3.8.0>.\bin\windows\kafka-server-start.bat .\config\server.properties

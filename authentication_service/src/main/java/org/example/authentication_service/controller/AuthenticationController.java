@@ -15,6 +15,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +35,7 @@ public class AuthenticationController {
         this.authenticationManager = authenticationManager;
         this.encoder = encoder;
     }
-
+    @Transactional
     @PostMapping("/authenticate")
     public ResponseEntity<String> authenticate(@RequestBody RequestData requestData) {
         try {
